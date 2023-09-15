@@ -43,9 +43,8 @@ const Login = () => {
 							<p>Sign In</p>
 						</div>
 
-						<label for="email">Email</label>
 						<input type="email" placeholder="Username" ref={username} />
-						<label for="password">Password</label>
+
 						<input type="password" placeholder="Password" ref={password} />
 
 						<Link to="/signup" className="link">

@@ -13,7 +13,7 @@ const NavbarComponent = () => {
 				token: user.token,
 			});
 			localStorage.setItem("user", null);
-			window.location.reload(false);
+			window.location.reload(true);
 		} catch (err) {
 			console.log(err);
 		}

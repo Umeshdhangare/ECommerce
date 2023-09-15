@@ -3,10 +3,12 @@ import { API_URI } from "../config";
 import axios from "axios";
 import { UserContext } from "../contexts/UserConetxt";
 import "./ProductComponent.css";
+import { useNavigate } from "react-router-dom";
 
 const Product = () => {
 	const [productList, setProductList] = useState([]);
 	const { user } = useContext(UserContext);
+	const navigate = useNavigate();
 
 	const handleAddToCart = async (product) => {
 		try {
@@ -17,6 +19,7 @@ const Product = () => {
 					headers: { Authorization: user.token },
 				}
 			);
+			navigate("/cart");
 		} catch (err) {
 			console.log(err);
 		}
@@ -37,7 +40,7 @@ const Product = () => {
 	return (
 		<>
 			{productList.map((p) => (
-				<div className="product">
+				<div key={p._id} className="product">
 					<img src={p.imgUrl} alt={p.name} />
 
 					<div className="product__info">
@@ -45,8 +48,15 @@ const Product = () => {
 
 						<p className="info__price">${p.price}</p>
 					</div>
+
 					<div>
-						<button onClick={(p) => handleAddToCart(p)}>ADD TO CART </button>
+						{user ? (
+							<button type="button" onClick={() => handleAddToCart(p)}>
+								ADD TO CART
+							</button>
+						) : (
+							""
+						)}
 					</div>
 				</div>
 			))}

@@ -14,6 +14,7 @@ const Cart = () => {
 				headers: { Authorization: user.token },
 			});
 			const carts = res.data.carts;
+
 			const tempArr = [];
 			carts.map((p) => {
 				tempArr.push(p["productId"]);
@@ -26,7 +27,7 @@ const Cart = () => {
 	return (
 		<>
 			{items.map((item) => (
-				<div className="cartitem">
+				<div key={item._id} className="cartitem">
 					<div className="cartitem__image">
 						<img src={item.imgUrl} alt={item.name} width="300" height="300" />
 					</div>
